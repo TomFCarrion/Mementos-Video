@@ -2,7 +2,24 @@ import React,{ Component } from 'react';
 import PropTypes from 'prop-types';
 import './media.css';
 
+
 class Media extends Component {
+  state = {
+    author: 'Tomas'
+  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     author: props.author
+  //   }
+  //
+  // }
+  handleClick = (event) => {
+    //console.log(this.props.image);
+    this.setState({
+      author: 'Tomas F Carrion',
+    })
+  }
   render() { //UI html
     const styles = {
       container:{ //los estilos en js se declaran con camelCase
@@ -13,7 +30,7 @@ class Media extends Component {
       }
     }
     return (
-      <div className="Media">
+      <div className="Media" onClick={this.handleClick}>
         <div className="Media-cover">
           <img className="Media-image"
             src={this.props.image}
@@ -22,7 +39,7 @@ class Media extends Component {
             height = {160}
           />
           <h3 className="Media-title">{this.props.title}</h3>
-          <p className="Media-Author">{this.props.author}</p>
+          <p className="Media-Author">{this.state.author}</p>
         </div>
       </div>
     )
@@ -30,9 +47,9 @@ class Media extends Component {
 }
 
 Media.propTypes = {
-  image: PropTypes.stringisRequired,
+  image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  author: PropTypes.stringisRequired,
+  author: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['video','audio']).isRequired,
 
 }
