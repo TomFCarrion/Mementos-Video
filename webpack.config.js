@@ -17,8 +17,7 @@ module.exports = (env) => {
   return {
 
     entry: {
-      "mementos-videos": path.resolve(__dirname, 'index.js'),
-    },
+      "home": path.resolve(__dirname, 'src/entries/home.js'),
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'js/[name].[hash].js',

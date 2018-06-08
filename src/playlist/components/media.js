@@ -1,9 +1,9 @@
-import React,{ Component } from 'react';
+import React,{ PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './media.css';
 
 
-class Media extends Component {
+class Media extends PureComponent {
   state = {
     author: 'Tomas'
   }
@@ -14,12 +14,12 @@ class Media extends Component {
   //   }
   //
   // }
-  handleClick = (event) => {
-    //console.log(this.props.image);
-    this.setState({
-      author: 'Tomas F Carrion',
-    })
-  }
+  // handleClick = (event) => {
+  //   //console.log(this.props.image);
+  //   // this.setState({
+  //   //   author: 'Tomas F Carrion',
+  //   // })
+  // }
   render() { //UI html
     const styles = {
       container:{ //los estilos en js se declaran con camelCase
@@ -30,7 +30,7 @@ class Media extends Component {
       }
     }
     return (
-      <div className="Media" onClick={this.handleClick}>
+      <div className="Media" onClick={this.props.handleClick}>
         <div className="Media-cover">
           <img
             src={this.props.cover}
