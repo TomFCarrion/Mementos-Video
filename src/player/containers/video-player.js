@@ -7,6 +7,7 @@ import PlayPause from '../components/play-pause';
 class VideoPlayer extends Component {
   state = {
     pause: true,
+    duration: 0,
 
   }
   ToggleClick = (event) => {
@@ -21,6 +22,10 @@ class VideoPlayer extends Component {
   }
   handleLoadedMetadata = event => {
      this.video = event.target;
+     this.setState ({
+       duration:this.video.duration
+     });
+
   }
   render() {
     return(
@@ -32,6 +37,9 @@ class VideoPlayer extends Component {
           pause={this.state.pause}
           handleClick={this.ToggleClick}
         />
+      <Timer
+        duration = {this.state.duration}
+      />
 
         <Video
           autoplay={this.props.autoplay}
