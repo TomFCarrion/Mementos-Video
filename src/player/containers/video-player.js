@@ -3,11 +3,16 @@ import VideoPlayerLayout from '../components/video-player-layout.js';
 import Video from '../components/video';
 import Title from '../components/title';
 import PlayPause from '../components/play-pause';
+import Timer from '../components/timer';
+import Controls from '../components/video-player-controls';
+import Spinner from '../components/spinner';
+import ProgressBar from '../components/progress-bar.js'
 
 class VideoPlayer extends Component {
   state = {
     pause: true,
     duration: 0,
+    currentTime: 0,
 
   }
   ToggleClick = (event) => {
@@ -25,29 +30,48 @@ class VideoPlayer extends Component {
      this.setState ({
        duration:this.video.duration
      });
+   }
+     handleTimeUpdate = event => {
+       // console.log(this.video.currentTime)
+       this.setState({
+         currentTime: this.video.currentTime
+       })
+     }
 
+     handleProgressChange = event => {
+    // event.target.value
+    this.video.currentTime = event.target.value
   }
+
   render() {
     return(
       <VideoPlayerLayout>
         <Title
           title="Esto es un video chido!"
         />
-        <PlayPause
-          pause={this.state.pause}
-          handleClick={this.ToggleClick}
-        />
-      <Timer
-        duration = {this.state.duration}
-      />
-
+        <Controls>
+          <PlayPause
+            pause={this.state.pause}
+            handleClick={this.ToggleClick}
+          />
+          <Timer
+            duration = {this.state.duration}
+            currentTime = {this.state.currentTime}
+          />
+          <ProgressBar
+           duration={this.state.duration}
+           value={this.state.currentTime}
+           handleProgressChange={this.handleProgressChange}
+           />
+        </Controls>
+        <Spinner/>
         <Video
           autoplay={this.props.autoplay}
           pause={this.state.pause}
-          onLoadedMetadata = {this.handleLoadedMetadata}
+          handleLoadedMetadata={this.handleLoadedMetadata}
+          handleTimeUpdate={this.handleTimeUpdate}
           src="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"
         />
-
       </VideoPlayerLayout >
     )
   }

@@ -1,11 +1,10 @@
 import React from 'react';
-import './timer.css'
+import FormattedTime from '../utilities/formattedtime';
 
-function Timer (props){
-  return(
-    <div>
+const Timer = (props) => (
+	<FormattedTime
+		secs={ props.currentTime }
+	/>
+)
 
-    </div>
-
-  )
-}
+export default Timer;
